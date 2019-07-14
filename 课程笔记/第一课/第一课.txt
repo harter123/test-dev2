@@ -1,0 +1,129 @@
+﻿1.摩登海贼， 
+广东人，深圳这边工作
+
+6年了，工作过两家公司，
+
+一直以来都是以开发为主，接触过比较多的语言
+
+ruby  移动端的自动化测试框架； calabash
+
+php 世界上最好的语言。 接口测试框架。  tcp层的测试框架，不是http
+
+go 开发后端程序
+
+python  + vue 为主。 前端+后端 ，简称 全栈开发工程师，反正就是什么都做。打杂
+
+
+tcp: socket 进行连接
+
+H5 : hmtl5, 播放多媒体
+
+python 不算基础底层语言， c, java; 掌握这种基础语言，学其他的就很容易
+
+
+上课50 分钟， 后面的5- 10分钟，就是给大家提问题
+
+讲课过程中，大家有问题可以随时提啊。
+
+django: 生态非常完善，整体框架比较大，比较全。使用比较方便，很多底层的代码都不需要自己写
+flask：生态也很完善，整体框架比较轻量级，灵活性非常好。个人需要做很多事情，需要写很多底层的代码
+
+1. 课程的技术栈
+开发环境： python  pycharm  
+           vue     webstorm
+
+提前准备的知识：
+HTML，css，js， ajax
+Python， django， git
+
+vue.js： 前端框架。专门写前端html的页面框架
+关键字： 绑定，响应性，实时性，组件式
+
+控件库： element-ui
+
+
+课程安排：
+
+github: https://github.com/harter123/test-dev2
+课程的视频：
+链接: https://pan.baidu.com/s/1mBUhR0xUX_mouCEl2jBA4w 提取码: ztcu 
+
+目标： 做一个接口测试平台
+关于前后端分离说明
+
+1. 创建前后端，进行基础的设置
+2. django后端接口定义规则，日志设置，异常处理模块，统一的响应
+3. 登录模块，登录的持久化（session和cookie）
+4. 调试接口模块
+5. 服务模块
+6. 接口模块，定义，编辑之类
+7. 任务模块
+8. 任务的执行，结果展示
+9. mock的功能（看是否需要）  easy-mock
+10. vue打包发布
+11. 前后端生产环境服务部署配置： 
+前端： vue + nginx
+后端： django + nginx
+
+
+尽量用最简单的是否来实现，特别前端ui。
+
+
+1. 安装nodejs：这个直接在官网上下载安装
+安装后自然有两个程序： node， npm
+
+2. 安装vue-cli:  npm install  -g @vue/cli  (vue分为两个版本 2.x 和 3.x)
+
+npm config set registry https://registry.npm.taobao.org
+// （如果比较慢，配置这个taobao的源，这个比较快）
+
+
+3. 创建vue 项目
+vue create 项目名称
+然后进行一下特性选择，也可以直接选择default
+
+执行vue： npm run serve
+
+
+4. element-ui 加到我们的项目里面去
+npm i element-ui -S
+在 main.js 中写入以下内容：
+
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import App from './App.vue';
+
+Vue.use(ElementUI);
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+
+5. 安装axios, 用来发送ajax请求： npm install axios -S
+https://www.kancloud.cn/yunye/axios/234845
+
+
+6. 创建django 项目
+
+前端是 驼峰式
+后端是 斜杠式
+
+
+作业：
+1. 安装好vue, 运行起来
+2. 去看一下vue的语法： 
+https://www.runoob.com/vue2/vue-install.html
+https://cn.vuejs.org/v2/guide/
+
+
+
+
+
+
+
+
+
+
+
