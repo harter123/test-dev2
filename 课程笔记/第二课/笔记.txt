@@ -1,0 +1,126 @@
+1. 介绍vue对象的结构
+
+vue的执行逻辑顺序：
+
+1. main.js 就是主文件，也是入口文件
+2. 加载路由文件 router.js 还有index.html
+3. 加载App.vue ,这个就是vue的主页面文件
+
+
+vue对象最常见的结构目录了：
+1. 所有的 .vue 文件的格式都是一样
+【html】 + 【js】 + 【css】
+2. 所有的 .vue 文件都是组件，可以理解为组件的格式： 【html】 + 【js】 + 【css】
+
+html 部分, 格式是固定的， template 里面只能有一个div， 当然 div 里面的东西就随意，怎么都行
+<template>
+    <div>
+	</div>
+</template>	
+
+
+js 部分：包含在script， 然后export出来
+<script> 
+ export default {
+        name: 'HelloWorld',
+        components: {},
+        props: {
+            msg: String
+        },
+        data() {
+            return {}
+        },
+        methods: {},
+        created() {
+        },
+    }
+</script>
+
+css 部分：跟一般的css没有区别
+<style scoped>
+.style {
+}
+</style>
+
+
+vue 的对象的数据结构： 
+可以理解就是一个字典
+可以跟 面向对象的类进行对应来理解
+<script>
+    export default {
+        name: 'HelloWorld',  # 类的名称
+        components: {},      # 类导入的依赖
+        props: {             # 类初始化时候接受的参数
+            msg: String
+        },
+        data() {             # 类里面的成员变量
+            return {}
+        },
+        methods: {},         # 类里面的成员方法
+        created() {          # 类里面的构建函数，也就是初始化函数
+
+        },
+    }
+</script>
+
+当然vue 还有很多属性，computed, watch之类的，这些复杂的东西暂时不讲，用到的时候再讲
+
+
+vue的组件是如何使用：
+1. 创建vue组件
+2. 在父组件里面导入组件的路径
+3. 在父组件里面的components进行注册
+4. 然后在父组件里面的html部分按照定义的key当做标签来使用
+
+
+2. 简单介绍vue的各种指令和语法
+
+1. 数据的展示（插值）
+{{ message }} 大括号包含变量
+<div v-html="message"></div> v-html把变量当做html代码进行解析
+
+
+2. 属性
+<div :id="app" >  <div v-bind:id="app" >
+
+就是对照着 vue 里面props
+
+3. 指令
+v-if  v-else v-else-if 控制内容是否  存在
+v-show  控制内容是否  展示
+v-for 涉及到两种数据格式：数组和字典对象
+<ul>
+    <li v-for="i in list1" :key="i">{{i}}</li>  # 数组方式
+</ul>
+
+<ul>
+	<li v-for="(value, key, index) in obj1" :key="index">{{index}}: {{key}}: {{value}}</li>
+</ul>
+
+v-for 必须要设置一个key
+
+4. 事件处理
+<el-button v-on:click="clicka">默认按钮a</el-button>  必须接受一个函数
+<el-button @click="clickb">默认按钮b</el-button>
+
+事件有很多  click  select  change  focus  blur  不同的组件有不同的事件
+需要在使用某个组件的时候好好看它的文档
+
+
+5. 表单绑定 v-modal  双向数据绑定   v-modal  
+<input />
+
+<input v-model="message" placeholder="">
+
+复选框
+单选框
+select都是属于 表单
+
+<input type="checkbox" id="checkbox" v-model="checked">
+
+
+作业：
+vue的各种指令去熟悉，手动都敲一遍，熟悉它的效果
+这节课是比较重要，是vue的基础
+
+

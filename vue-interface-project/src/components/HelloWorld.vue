@@ -1,66 +1,105 @@
 <template>
-  <div class="hello">
-    <el-row>
-      <el-button icon="el-icon-search" circle></el-button>
-      <el-button type="primary" icon="el-icon-edit" circle></el-button>
-      <el-button type="success" icon="el-icon-check" circle></el-button>
-      <el-button type="info" icon="el-icon-message" circle></el-button>
-      <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-      <el-button type="danger" icon="el-icon-delete" circle></el-button>
-    </el-row>
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div class="hello">
+
+        <my-component :data="value3"></my-component>
+
+        <div>
+            value1: {{value1}}
+        </div>
+        <div :class="value3">
+            value2: <span v-html="value2"></span>
+        </div>
+
+        <div v-if="value4">
+            value4-if: {{value4}}
+        </div>
+        <div v-show="value4">
+            value4-show: {{value4}}
+        </div>
+
+        <ul>
+            <li v-for="i in list1" :key="i">{{i}}</li>
+        </ul>
+        <ul>
+            <li v-for="(i, index) in list1" :key="i">{{index}}: {{i}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="(value, key, index) in obj1" :key="index">{{index}}: {{key}}: {{value}}</li>
+        </ul>
+
+        <el-button v-on:click="clicka">默认按钮a</el-button>
+        <el-button @click="clickb">默认按钮b</el-button>
+
+
+        <input v-model="message" placeholder="">
+        <el-button @click="clickc">默认按钮c</el-button>
+
+
+        <input type="checkbox" id="checkbox" v-model="checked">
+
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+    import myComponent from "./myComponent"
+
+    export default {
+        name: 'HelloWorld',
+        components: {
+            "my-component": myComponent,
+        },
+        props: {
+            msg: String
+        },
+        data() {
+            return {
+                value1: "摩登",
+                value2: "<h1>这是一个标题</h1>",
+                value3: "value3_id",
+
+                value4: false,
+
+                list1: ["a", 'b', 'c', 'd'],
+                obj1: {
+                    a: "va",
+                    b: "vb",
+                    c: "vc",
+                    d: "vd",
+                },
+
+                message: "m",
+
+                checked: false,
+            }
+        },
+        methods: {
+            clicka(){
+                alert("clicka")
+            },
+            clickb(){
+                alert("clickb")
+            },
+            clickc(){
+                this.message = "clickc";
+            }
+        },
+        created() {
+
+        },
+
+        watch: {
+            message:function () {
+                console.log(this.message);
+            },
+            checked:function () {
+                console.log(this.checked);
+            }
+        }
+    }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
