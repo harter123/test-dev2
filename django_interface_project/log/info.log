@@ -1,0 +1,5 @@
+ERROR 2019-08-11 11:11:44,477 views 8116 7200 error-1
+ [ERROR] 2019-08-11 11:14:55,711 [Thread-2:7448] [interface:13] [views:test_failed] - error-1
+ [INFO] 2019-08-11 11:16:40,033 [Thread-2:7448] [interface:8] [views:test_success] - info-1
+ [INFO] 2019-08-11 11:32:26,530 [Thread-2:5804] [interface:8] [views:test_success] - info-1
+ [ERROR] 2019-08-11 11:32:52,021 [Thread-2:5804] [interface:13] [views:test_failed] - error-1

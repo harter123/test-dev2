@@ -1,0 +1,168 @@
+大纲：后端服务的基础设置
+1. 跨域问题
+2. 日志设置
+3. 公共的响应设置
+4. 中间件和异常设置
+5. restful风格的接口介绍和定义
+
+
+1. 跨域问题（详细看图表）： 一般浏览器都会组织这种行为，设计安全性上
+如何解决：
+   a. pip install django-cors-headers
+   b. INSTALLED_APPS = [
+    ...
+    'corsheaders'，
+    ...
+ ]  添加上这个app
+   c. MIDDLEWARE_CLASSES = (
+    ...
+    'corsheaders.middleware.CorsMiddleware', # 添加上这个中间件
+    'django.middleware.common.CommonMiddleware', # 注意顺序， 必须是这个顺序
+    ...
+)   添加上这个中间件
+   d. 添加上一些跨域的设置
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    '*'
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
+
+2. 日志设置：就是一些关于设置上的东西
+一般分为三个日志文件：
+1. all  2. debug  3. error
+
+debug > info > warning > error
+
+打印某一个级别的日志，那么大于它的级别的日志文件也会打印出来，小于它的级别则不会
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+       'standard': {
+            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'
+       }  #日志格式
+    },
+    'filters': {
+    },
+    'handlers': {
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': [os.path.join(BASE_DIR, 'log/all.log')],     #日志输出文件
+            'maxBytes': 1024*1024*5,                  #文件大小
+            'backupCount': 5,                         #备份份数
+            'formatter':'standard',                   #使用哪种formatters日志格式
+        },
+        'error': {
+            'level':'ERROR',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': [os.path.join(BASE_DIR, 'log/error.log')],
+            'maxBytes':1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'info': {
+            'level':'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': [os.path.join(BASE_DIR, 'log/info.log')],
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['default', 'console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'django.request': {
+            'handlers': ['default',  'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'interface': {
+            'handlers': ['info',  'console', 'error', 'default'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
+
+
+1.formatters：配置打印日志格式
+2.handler：用来定义具体处理日志的方式，可以定义多种，
+	"default"就是默认方式，"console"就是打印到控制台方式。
+3.loggers:用来配置用那种handlers来处理日志，比如你同时需要输出日志到文件、控制台。
+
+import logging
+
+log = logging.getLogger('interface')
+log.debug('')
+log.info('sss')
+log.error('')
+log.warn('sss')
+
+
+计算型的代码放在util里面
+
+
+3. 定义接口的数据格式
+{
+   "success": true,
+   "data": {},
+   "error": {
+		"code" : "",
+		"message": ""
+   }
+}
+
+4. 介绍中间件：看图， 所有的请求和响应都是经过中间件来传输
+from django.utils.deprecation import MiddlewareMixin
+from interface_main.utils.http_format import response_success, response_failed
+
+
+class MyMiddleWare(MiddlewareMixin):
+    def process_request(self, request):  # 会捕捉所有的请求
+        print('请求进来了')
+
+    def process_response(self, request, response): # 会捕捉所有的响应
+        print('响应来了')
+        return response
+
+    def process_exception(self, request, exception): # 会捕捉所有的异常
+        print('捕捉到异常了')
+        return response_success()
+
+
+isinstance() 专门用来判断一个对象的类型

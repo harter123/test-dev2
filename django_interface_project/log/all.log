@@ -1,0 +1,87 @@
+ [DEBUG] 2019-08-11 11:14:48,808 [Dummy-1:2284] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [ERROR] 2019-08-11 11:14:55,711 [Thread-2:7448] [interface:13] [views:test_failed] - error-1
+ [INFO] 2019-08-11 11:14:55,714 [Thread-2:7448] [django.server:154] [basehttp:log_message] - "GET /failed HTTP/1.1" 200 95
+ [INFO] 2019-08-11 11:16:40,033 [Thread-2:7448] [interface:8] [views:test_success] - info-1
+ [INFO] 2019-08-11 11:16:40,035 [Thread-2:7448] [django.server:154] [basehttp:log_message] - "GET /success HTTP/1.1" 200 73
+ [DEBUG] 2019-08-11 11:18:33,811 [Dummy-1:7136] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:32:15,400 [Dummy-1:7956] [django.db.backends:111] [utils:execute] - (0.002) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [INFO] 2019-08-11 11:32:26,530 [Thread-2:5804] [interface:8] [views:test_success] - info-1
+ [INFO] 2019-08-11 11:32:26,530 [Thread-2:5804] [django.server:154] [basehttp:log_message] - "GET /success HTTP/1.1" 200 73
+ [ERROR] 2019-08-11 11:32:52,021 [Thread-2:5804] [interface:13] [views:test_failed] - error-1
+ [INFO] 2019-08-11 11:32:52,022 [Thread-2:5804] [django.server:154] [basehttp:log_message] - "GET /failed HTTP/1.1" 200 95
+ [DEBUG] 2019-08-11 11:33:23,063 [Dummy-1:7944] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [INFO] 2019-08-11 11:33:31,301 [Thread-2:1744] [django.server:154] [basehttp:log_message] - "GET /success HTTP/1.1" 200 67
+ [DEBUG] 2019-08-11 11:34:13,818 [Dummy-1:5312] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:36:33,168 [Dummy-1:4312] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:40:39,523 [Dummy-1:2284] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:43:02,972 [Dummy-1:7804] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:44:21,094 [Dummy-1:6828] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [INFO] 2019-08-11 11:44:25,715 [Thread-2:7816] [django.server:154] [basehttp:log_message] - "GET /success HTTP/1.1" 200 97
+ [DEBUG] 2019-08-11 11:45:54,664 [Dummy-1:7788] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [INFO] 2019-08-11 11:45:58,407 [Thread-2:8152] [django.server:154] [basehttp:log_message] - "GET /success HTTP/1.1" 200 81
+ [DEBUG] 2019-08-11 11:46:39,489 [Dummy-1:7532] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:46:45,116 [Dummy-1:8144] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:48:42,528 [Dummy-1:6180] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:48:50,237 [Dummy-1:7008] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:50:56,008 [Dummy-1:2804] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:53:46,340 [Dummy-1:7744] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 11:56:08,688 [Dummy-1:7464] [django.db.backends:111] [utils:execute] - (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 12:00:41,709 [Dummy-1:4392] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+ [DEBUG] 2019-08-11 12:03:06,964 [Dummy-1:7180] [django.db.backends:111] [utils:execute] - (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
