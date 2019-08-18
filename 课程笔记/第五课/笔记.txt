@@ -1,0 +1,72 @@
+1. 介绍restful风格的api和定义
+2. 注册登录接口定义
+
+1.1. restfule风格：
+a. 每一个URI代表一种资源： /url1/part1/part2/'id'/     
+                           /url2/part2/part1/'md5'/   这是针对单个数据的url
+                           /url3/part1/part2/         这是一种列表的URL定义
+b. 客户端通过四个HTTP动词，对服务器端资源进行操作，实现"表现层状态转化":
+
+url（代表资源） + 请求方法（代表动作）：确定唯一的一个接口
+
+	  增，   删，     改，             查
+url + post,  delete,  update(patch),   get
+
+我们的应用： 
+我们的接口通常操作的数据有两种, 或者是我们的url定义通常是有两种形式
+： 1 列表(get, post)  2.单个数据(delete, update(patch), get)
+
+
+所以我们的url定义只有两种，一种是针对列表（get, post）， 一种是针对单个数据(get， delete, put, patch)
+put 和 patch : put代表是全量修改   patch代表的部分修改
+
+
+2. 接口定义的例子：
+1. from django.views.generic import View
+2. 创建一个类，继承与 View， 添加各种方法
+class UserView(View):
+
+    def get(self, request, *args, **kwargs):
+        return response_success("get")
+
+    def post(self, request, *args, **kwargs):
+        return response_success("post")
+
+    def put(self, request, *args, **kwargs):
+        return response_success("put")
+
+    def patch(self, request, *args, **kwargs):
+        return response_success("patch")
+
+    def delete(self, request, *args, **kwargs):
+        return response_success("delete")
+
+3. 注册url:
+path('api/backend/user/', UserView.as_view()),
+
+4. 登录注册实际上是属于针对列表的url:
+登录： 实际上是对列表的一个筛选和验证
+注册： 实际上是创建一个数据
+
+data.get("user", "") 数据跟 data["user"] 是一样的
+但是前者在 “user” 不存在的情况是给一个默认值，但是后者在“user”不存在的情况下，是会抛出异常
+
+1. 注册： User.objects.create_user(username=username, password=password)
+2. 登录: authenticate(username=username, password=password)
+3. form 专门用来进行参数校验
+
+
+4. login(request, user)  # 登录持久化， 生成session 有效期是在settings里面定义的：
+需要添加上下面的配置
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # 引擎（默认）
+SESSION_COOKIE_NAME = "sessionid"  # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串（默认）
+SESSION_COOKIE_PATH = "/"  # Session的cookie保存的路径（默认）
+SESSION_COOKIE_DOMAIN = None  # Session的cookie保存的域名（默认）
+SESSION_COOKIE_SECURE = False  # 是否Https传输cookie（默认）
+SESSION_COOKIE_HTTPONLY = True  # 是否Session的cookie只支持http传输（默认）
+SESSION_COOKIE_AGE = 1209600  # Session的cookie失效日期（2周）（默认）
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # 是否关闭浏览器使得Session过期（默认）
+SESSION_SAVE_EVERY_REQUEST = False  # 是否每次请求都保存Session，默认修改之后才保存（默认
+SESSION_COOKIE_SAMESITE = None
+
+5.  logout(request) 代表

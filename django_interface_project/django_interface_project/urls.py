@@ -15,10 +15,8 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path
-from interface_main import views
+from interface_main.views.user.users_view import UsersView
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path("success", views.test_success),
-    path("failed", views.test_failed)
+    path('api/backend/users/', UsersView.as_view()),
 ]
