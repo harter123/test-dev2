@@ -49,7 +49,9 @@ class UsersView(View):
             default_log.error(form.errors.as_json())
             raise MyException()
 
-        # result = User.objects.create_user(username=data["username"], password=data["password"])
+        if User.objects.filter(username=form.cleaned_data["username"]).exists():
+            raise MyException(message="用户已存在")
+
         user = User.objects.create_user(username=form.cleaned_data["username"],
                                         password=form.cleaned_data["password"])
         if user:

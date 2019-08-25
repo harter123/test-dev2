@@ -1,0 +1,61 @@
+大纲：
+实现登录模块的前后端联动
+
+
+axios.get('/user?ID=12345')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
+// Optionally the request above could also be done as
+axios.get('/user', {
+    params: {
+      ID: 12345
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+  
+上面的两种方式是等价的，只是写法不一样
+
+
+then(function (response) { # 状态码是2xx的情况
+        console.log(response);
+    }).catch(function (error) {  # 状态码是非2xx的情况
+        console.log(error);
+    });
+
+我们的接口形式：
+{
+success: true or false,
+data:{},
+error:{
+	message:xxx,
+	code: xxx,
+},
+}
+
+withCredentials: true # 这个参数代表是需要把本地的cookies传给服务端
+
+
+跳转到首页有两种方式：
+1. 用原始的js的方法： window.location="xxx"  # 这种方式会整个页面都进行重载，相对就慢一些
+2. 用vue的方法： this.$router.push("xxx")  # 这种方式就像是切换一个tab, 只是vue内部的一种页面切换， 所以会更快
+
+
+首页需要有判断用户是否已经登录的逻辑：
+用户如果已经登录，则不作任务事情； 如果用户没有登录，则进行跳转到登录页面（this.$router.push("/login")）
+
+
+除了登录的接口，其他的接口应该都是需要用户在登录过的情况才允许请求的： 这个就可以利用中间件来实现了
+request.path 能够获取得到用户请求的path
+
+中间件里面是不能够抛出异常的，如果有异常的返回，必须要直接return: return response_failed(ErrorCode.COMMON, '用户未登录')
