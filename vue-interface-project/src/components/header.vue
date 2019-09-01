@@ -1,10 +1,19 @@
 <template>
     <div class="main-head">
-        <div class="head-img">
-            <img :src="vueImg" height="50px" width="50px"/>
-            <span>接口测试系统</span>
+        <div class="menu-head">
+            <div class="head-img">
+                <img :src="vueImg" height="50px" width="50px"/>
+                <span>接口测试系统</span>
+            </div>
+            <el-menu v-if="isShowMenu" background-color="#eff4fa" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="interface">接口</el-menu-item>
+                <el-menu-item index="task">任务</el-menu-item>
+                <el-menu-item index="debug">调试</el-menu-item>
+                <el-menu-item index="mock">mock</el-menu-item>
+            </el-menu>
+
         </div>
-        <el-button size="small" @click="logout">注销</el-button>
+        <el-button v-if="isShowLogout" size="small" @click="logout">注销</el-button>
     </div>
 </template>
 
@@ -14,12 +23,26 @@
 
     export default {
         name: "header",
+        props: {
+            isShowLogout: {
+                type: Boolean,
+                default: false,
+            },
+            isShowMenu: {
+                type: Boolean,
+                default: false,
+            }
+        },
         data() {
             return {
-                vueImg: img
+                vueImg: img,
+                activeIndex: "interface",
             }
         },
         methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
             logout() {
                 logoutRequest().then(data => {
                     this.$message.info("你已经退出登录");
@@ -33,6 +56,9 @@
 </script>
 
 <style scoped>
+    .menu-head {
+        display: flex;
+    }
     .main-head {
         background: #eff4fa;
         height: 60px;
@@ -45,5 +71,6 @@
     .head-img {
         display: flex;
         align-items: center;
+        margin-right: 30px;
     }
 </style>

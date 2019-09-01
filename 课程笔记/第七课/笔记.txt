@@ -1,0 +1,37 @@
+大纲：
+service的功能的实现：
+1. 实现前端的整体的菜单栏
+2. 实现service的表结构，后端接口
+
+
+
+
+
+{
+name:1,
+nexe: []
+}
+
+Service.objects.filter(id=service_id) 获取的是一个列表，不是单个数据
+
+
+return response_success(service) 直接这么返回是错误的，不能直接json化一个modle对象，需要先转化为字典
+
+form.cleaned_data = {
+"name": "",
+"description": "",
+"parent":""
+}
+
+
+# Service.objects.filter(id=service_id).update(name=form.cleaned_data["name"],
+            #                                              description=form.cleaned_data["description"],
+            #                                              parent=form.cleaned_data["parent"])
+
+            Service.objects.filter(id=service_id).update(**form.cleaned_data)
+这两种写法是等价
+
+
+
+
+

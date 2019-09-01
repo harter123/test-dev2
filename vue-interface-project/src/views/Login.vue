@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <header-component></header-component>
+        <header-component :isShowLogout="false" :isShowMenu="false"></header-component>
         <div class="login-context">
             <h2>账号登录</h2>
 
