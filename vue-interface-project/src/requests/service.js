@@ -16,7 +16,7 @@ export const deleteSingleServiceRequest = (service_id) => {
     return deleteRequest("api/backend/service/" + service_id + "/")
 };
 
-export const updateSingleServiceRequest = (service_id) => {
-    return putRequest("api/backend/service/" + service_id + "/")
+export const updateSingleServiceRequest = (service_id, data) => {
+    return putRequest("api/backend/service/" + service_id + "/", data)
 };
 

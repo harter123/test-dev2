@@ -11,4 +11,4 @@ class ServiceForm(forms.Form):
                                   required=True,
                                   error_messages={'required': "description can not be empty"})
 
-    parent = forms.IntegerField(required=False)
+    parent = forms.IntegerField(required=True)
