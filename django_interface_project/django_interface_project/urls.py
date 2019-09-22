@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.contrib import admin
-from django.http.response import JsonResponse
 from django.urls import path
+
+from interface_main.views.interface.interface_detail_view import InterfaceDetailView
+from interface_main.views.interface.interface_list_view import InterfacesListView
 from interface_main.views.user.users_view import UsersView
 from interface_main.views.user.user_info_view import UserInfoView
 from interface_main.views.service.service_detail_view import ServiceDetailView
@@ -28,4 +30,7 @@ urlpatterns = [
 
     path('api/backend/services/', ServicesListView.as_view()),
     path('api/backend/service/<int:service_id>/', ServiceDetailView.as_view()),
+
+    path('api/backend/interfaces/', InterfacesListView.as_view()),
+    path('api/backend/interface/<int:interface_id>/', InterfaceDetailView.as_view()),
 ]

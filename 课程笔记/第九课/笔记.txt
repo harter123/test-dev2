@@ -1,0 +1,66 @@
+大纲：
+1.定义好form的jsonfidle
+2.完成接口模块的列表接口
+3.完成接口模块的前端列表展示
+
+
+isinstance 专门用来判断变量类型  跟 type函数很相似
+
+import json
+from django import forms
+
+
+定义form的字段
+最重要的是validate函数，用来进行类型校验
+class JsonField(forms.Field):
+    def __init__(self, *args, **kwargs):
+        super(JsonField, self).__init__(*args, **kwargs)
+
+    def to_python(self, value):
+        """
+        数据从moedel读进来的时候做的处理
+        :param value:
+        :return:
+        """
+        if value is None:
+            return dict()
+        if isinstance(value, dict) or isinstance(value, list):
+            return value
+        try:
+            ret = json.loads(value)
+        except Exception:
+            return dict()
+        else:
+            return ret
+
+    def validate(self, value): # 最重要的是这个
+        """
+        数据从前端请求进来的时候的数据校验
+        :param value:
+        :return:
+        """
+        if self.required or value is not None:
+            if not isinstance(value, dict) or not isinstance(value, list):
+                raise forms.ValidationError('格式不正确')
+
+        return value
+        # return self.to_python(value)
+
+
+接口列表是属于某个服务，所以必须要有一个service_id来限定范围
+同时也要有分页的功能， 所以还需要有两个参数，每页个数size和页码page
+
+如何用get在一个字典里面获取值
+d = {'a': 1}
+
+一般的方法：d['a']
+使用get： d.get('a')
+上面两种方法是等价的
+
+get后面可以加多一个参数，用来表示默认值.
+如果执行下面：
+d['b'], d.get('b', 2)
+那么前面就会报错，但是后面的就会返回2，不会报错
+
+
+django分页 https://blog.csdn.net/weixin_42833042/article/details/82253275

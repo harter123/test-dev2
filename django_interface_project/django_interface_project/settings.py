@@ -211,17 +211,17 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['default', 'console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False
         },
         'django.request': {
             'handlers': [ 'default', 'console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False,
         },
         'interface': {
             'handlers': ['default', 'info',  'console', 'error'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False,
         },
     }

@@ -1,5 +1,7 @@
 from django import forms
 
+from interface_main.forms.fields.json_field import JsonField
+
 
 class InterfaceForm(forms.Form):
     name = forms.CharField(max_length=200,
@@ -21,3 +23,8 @@ class InterfaceForm(forms.Form):
                                   required=True,
                                   error_messages={'required': "params_type can not be empty"})
     response = forms.CharField(required=False, max_length=5000)
+
+    asserts = JsonField()
+    headers = JsonField()
+    params = JsonField()
+

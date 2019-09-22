@@ -2,7 +2,8 @@
     <div class="interface-main">
         <div class="service-tree-main">
             <el-button type="primary" plain size="small" @click="openAddServiceModal(0)">创建根节点</el-button>
-            <el-tree class="margin-top-5" :data="data" :props="defaultProps" :default-expand-all="true" @node-click="handleNodeClick">
+            <el-tree class="margin-top-5" :data="data" :props="defaultProps" :default-expand-all="true"
+                     @node-click="handleNodeClick">
                 <div class="custom-tree-node" slot-scope="{ node, data }">
                     <span>{{ node.label }}</span>
                     <el-dropdown @command="handleCommand">
@@ -51,7 +52,7 @@
             </el-dialog>
         </div>
         <div class="interface-list-main">
-            34
+            <interface-list :serviceId="currentServiceId"></interface-list>
         </div>
     </div>
 </template>
@@ -64,8 +65,13 @@
         deleteSingleServiceRequest
     } from "../../requests/service"
 
+    import interfaceList from "./list"
+
     export default {
         name: "index",
+        components: {
+            'interface-list': interfaceList
+        },
         data() {
             return {
                 data: [],
@@ -95,6 +101,8 @@
                         {required: true, message: '请输入描述', trigger: 'blur'},
                     ],
                 },
+
+                currentServiceId: undefined,
             }
         },
         methods: {
@@ -179,7 +187,7 @@
                 }
             },
             handleNodeClick(data) {
-                console.log(data);
+                this.currentServiceId = data.id;
             },
             getServicesTreeFun() {
                 getServicesTreeRequest().then(data => {
