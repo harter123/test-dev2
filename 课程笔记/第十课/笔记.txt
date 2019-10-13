@@ -1,0 +1,65 @@
+大纲：
+1. 完成接口详情的增删改查
+
+
+接口的新增和编辑，不用表单的形式来做，而是采用json的编辑格式来
+
+vue2-ace-editor这是一个json格式的编辑器，接口模块所有数据都放在这个编辑里面，然后统一保存，提交到后端接口
+
+
+先安装 这个编辑器：
+
+https://www.npmjs.com/package/vue2-ace-editor
+
+1. npm install --s vue2-ace-editor
+2. 在conponents里面添加组件声明
+components: {
+        editor: require('vue2-ace-editor'),
+    },
+	
+	
+3. 在methods里面声明一个方法：
+methods: {
+        editorInit: function () {
+            require('brace/ext/language_tools') //language extension prerequsite...
+            require('brace/mode/html')                
+            require('brace/mode/javascript')    //language
+            require('brace/mode/less')
+            require('brace/theme/chrome')
+            require('brace/snippets/javascript') //snippet
+        }
+    },
+	
+4.直接在 vue里面使用
+<editor v-model="content" @init="editorInit" lang="html" theme="chrome" width="500" height="100"></editor>
+
+
+5. 需要注意一点，lang="html" 需要改为json, 上面的那个editorInit也是一样
+methods: {
+        editorInit: function () {
+            require('brace/ext/language_tools') //language extension prerequsite...
+            require('brace/mode/json')    #改为json             
+            require('brace/mode/javascript')    //language
+            require('brace/mode/less')
+            require('brace/theme/chrome')
+            require('brace/snippets/javascript') //snippet
+        }
+    },
+<editor v-model="content" @init="editorInit" lang="json" theme="chrome" width="500" height="100"></editor>
+
+
+子组件和父组件的交互：
+1. 在子组件里面抛出事件：this.$emit('事件名称', 数据)
+2. 在父组件里面捕捉事件， 用@在调用子组件的地方捕捉
+
+
+element-ui的table
+scope.row 代表当前行的数据，这是写死，element-ui 自己定义
+
+JSON.stringify(this.default, null, 4) // 这个是把对象转成json字符串
+JSON.parse(this.content) 是会抛出异常的，专门用来把字符串转为对象
+
+try{
+} 
+catch(){
+} 专门用来捕捉异常

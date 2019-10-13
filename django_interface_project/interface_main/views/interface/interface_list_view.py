@@ -53,4 +53,5 @@ class InterfacesListView(View):
             Interface.objects.create(**form.cleaned_data)
             return response_success()
         else:
+            print(form.errors.as_json())
             raise MyException()

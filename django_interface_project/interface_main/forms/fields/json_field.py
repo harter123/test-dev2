@@ -30,7 +30,7 @@ class JsonField(forms.Field):
         :return:
         """
         if self.required or value is not None:
-            if not isinstance(value, dict) or not isinstance(value, list):
+            if not isinstance(value, dict) and not isinstance(value, list):
                 raise forms.ValidationError('格式不正确')
 
         return value
