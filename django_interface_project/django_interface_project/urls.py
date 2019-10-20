@@ -18,6 +18,8 @@ from django.urls import path
 
 from interface_main.views.interface.interface_detail_view import InterfaceDetailView
 from interface_main.views.interface.interface_list_view import InterfacesListView
+from interface_main.views.mock.mock_detail_view import MockDetailView
+from interface_main.views.mock.mock_list_view import MockListView
 from interface_main.views.user.users_view import UsersView
 from interface_main.views.user.user_info_view import UserInfoView
 from interface_main.views.service.service_detail_view import ServiceDetailView
@@ -33,4 +35,7 @@ urlpatterns = [
 
     path('api/backend/interfaces/', InterfacesListView.as_view()),
     path('api/backend/interface/<int:interface_id>/', InterfaceDetailView.as_view()),
+
+    path('api/backend/mocks/', MockListView.as_view()),
+    path('api/backend/mock/<int:mock_id>/', MockDetailView.as_view()),
 ]

@@ -1,0 +1,24 @@
+大纲：
+1. 前端项目改用pycharm来编辑打开
+2. mock服务的后端接口和部分的前端ui
+
+
+为什么要用pucharm: 电脑耗不住，速度太慢了，所以就变更了，改为pycharm
+如何设置：
+1. 打开pycharm,点击文件--设置
+2. 点击plugins
+3. 搜索vue 就可以找到 vue的插件，直接安装
+4. 重启pucharm
+
+
+启动vue可能会报很多警告，忽略，不影响使用
+
+mock服务是什么：
+就是我们自己设置一个url, 这个url永远都返回我自己设置的数据
+
+
+
+前端的菜单栏是没有点击那个菜单，展示那个数据的功能
+1. 先从菜单栏入手，点击某个菜单栏，我们就出抛出一个事件：
+在handleSelect函数 this.$emit('selectItem', key)
+2. 在home里面捕捉 ‘selectItem’事件

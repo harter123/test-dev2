@@ -41,7 +41,7 @@
         },
         methods: {
             handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+                this.$emit('selectItem', key)
             },
             logout() {
                 logoutRequest().then(data => {
