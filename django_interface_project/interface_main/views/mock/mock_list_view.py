@@ -7,7 +7,7 @@ from interface_main.forms.mock import MockForm
 from interface_main.models.mock import Mock
 from interface_main.utils.calc import CalcUtils
 
-from interface_main.utils.http_format import response_success
+from interface_main.utils.http_format import response_success, response_failed
 from interface_main.utils.log import default_log
 from interface_main.exception.my_exception import MyException
 
@@ -49,3 +49,12 @@ class MockListView(View):
         else:
             print(form.errors.as_json())
             raise MyException()
+
+
+def make_mock(request, mock_id):
+    mock = Mock.objects.filter(id=mock_id).first()
+    response = mock.response
+    if str(request.method).lower() == str(mock.method).lower():
+        return response_success(response)
+    else:
+        return response_failed()

@@ -19,12 +19,15 @@ from django.urls import path
 from interface_main.views.interface.interface_detail_view import InterfaceDetailView
 from interface_main.views.interface.interface_list_view import InterfacesListView
 from interface_main.views.mock.mock_detail_view import MockDetailView
-from interface_main.views.mock.mock_list_view import MockListView
+from interface_main.views.mock.mock_list_view import MockListView, make_mock
+from interface_main.views.task.task_detail_view import TaskDetailView
+from interface_main.views.task.task_interface.task_interface_view import task_get_interfaces, task_add_interface, \
+    task_remove_interface
+from interface_main.views.task.task_list_view import TaskListView
 from interface_main.views.user.users_view import UsersView
 from interface_main.views.user.user_info_view import UserInfoView
 from interface_main.views.service.service_detail_view import ServiceDetailView
 from interface_main.views.service.service_list_view import ServicesListView
-
 
 urlpatterns = [
     path('api/backend/users/', UsersView.as_view()),
@@ -38,4 +41,12 @@ urlpatterns = [
 
     path('api/backend/mocks/', MockListView.as_view()),
     path('api/backend/mock/<int:mock_id>/', MockDetailView.as_view()),
+    path('api/backend/make_mock/<int:mock_id>/', make_mock),
+
+    path('api/backend/tasks/', TaskListView.as_view()),
+    path('api/backend/task/<int:task_id>/', TaskDetailView.as_view()),
+
+    path('api/backend/show/task_interfaces/<int:task_id>/', task_get_interfaces),
+    path('api/backend/add/task_interface/<int:task_id>/<int:interface_id>/', task_add_interface),
+    path('api/backend/remove/task_interface/<int:task_interface_id>/', task_remove_interface),
 ]

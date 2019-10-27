@@ -11,6 +11,8 @@ ALLOW_PATHS = ["/api/backend/user/info/", "/api/backend/users/"]
 class MyMiddleWare(MiddlewareMixin):
     def process_request(self, request):  # 会捕捉所有的请求
         current_path = request.path
+        if "api/backend/make_mock" in current_path:
+            return
         if current_path in ALLOW_PATHS:
             pass
         else:

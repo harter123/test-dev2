@@ -19,6 +19,9 @@
                         prop="path"
                         label="URL"
                         min-width="20%">
+                    <template slot-scope="scope">
+                        <span>http://localhost:8000/api/backend/make_mock/{{scope.row.id}}/</span>
+                    </template>
                 </el-table-column>
                 <el-table-column
                         prop="description"
@@ -123,19 +126,32 @@
         },
         methods: {
             addOrEditMock() {
+                this.$refs.ruleForm.validate((valid) => {
+                    if (valid) { // 代表校验通过
+                        if ("add" === this.opsType) {
+                            this.addMock()
+                        } else {
+                            this.editMock()
+                        }
+                    } else {  //校验失败
+                        return false;
+                    }
+                });
 
             },
-            addInterface() {
-                let req = {};
+            addMock() {
+                let req = JSON.parse(JSON.stringify(this.mockForm));
                 try {
-                    req = JSON.parse(this.MockForm)
+                    req["response"] = JSON.parse(String(this.mockForm.response))
                 } catch (e) {
+                    console.log(e)
                     this.$message.error('请输入正确的json格式')
+                    return;
                 }
-
                 addMockRequest(req).then(data => {
                     if (true === data.data.success) {
-                        this.$emit('success')
+                        this.showAddOrEditMock = false
+                        this.getMocksFun()
                     } else {
                         this.$message.info("创建接口失败")
                     }
@@ -143,15 +159,19 @@
 
             },
             editMock() {
-                let req = {};
+                let req = JSON.parse(JSON.stringify(this.mockForm));
                 try {
-                    req = JSON.parse(this.MockForm)
+                    req["response"] = JSON.parse(String(this.mockForm.response))
+
                 } catch (e) {
+                    console.log(e)
                     this.$message.error('请输入正确的json格式')
+                    return;
                 }
                 updateSingMockRequest(this.currentMockId, req).then(data => {
                     if (true === data.data.success) {
-                        this.$emit('success')
+                        this.showAddOrEditMock = false;
+                        this.getMocksFun()
                     } else {
                         this.$message.info("创建接口失败")
                     }
