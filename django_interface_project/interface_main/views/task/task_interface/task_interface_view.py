@@ -34,6 +34,6 @@ def task_get_interfaces(request, task_id):
     for i in tis:
         interface = i.interface
         data = model_to_dict(interface)
-        data["task_interface_id"] = i.id
+        data["task_interface_id"] = i.id  #TaskInterfaceRelation 这个表的id,用来给移除表关联
         ret.append(data)
     return response_success(ret)

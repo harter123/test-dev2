@@ -16,6 +16,11 @@
                     :data="tableData"
                     style="width: 100%">
                 <el-table-column
+                        prop="id"
+                        label="ID"
+                        min-width="5%">
+                </el-table-column>
+                <el-table-column
                         prop="name"
                         label="名称"
                         min-width="20%">
@@ -33,7 +38,7 @@
                 <el-table-column
                         prop="description"
                         label="描述"
-                        min-width="35%">
+                        min-width="30%">
                 </el-table-column>
                 <el-table-column
                         fixed="right"

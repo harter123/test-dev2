@@ -3,6 +3,7 @@
         <header-component @selectItem="selectItem" :isShowLogout="true" :isShowMenu="true"></header-component>
         <interface-index v-if="menuItem === 'interface'"></interface-index>
         <mock-index v-if="menuItem === 'mock'"></mock-index>
+        <task-index v-if="menuItem === 'task'"></task-index>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
     import header from "../components/header"
     import interfaceIndex from "./interface/index"
     import mockIndex from "./mock/list"
+    import taskIndex from "./task/list"
 
     export default {
         name: 'home',
@@ -18,6 +20,7 @@
             "header-component": header,
             "interface-index": interfaceIndex,
             'mock-index': mockIndex,
+            'task-index': taskIndex,
         },
         data() {
             return {
