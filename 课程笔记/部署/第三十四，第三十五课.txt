@@ -1,0 +1,16 @@
+如何部署django和 vue, 使用nginx
+
+
+1. 下载nginx
+2. 项目部署结构图
+3.  打包vue,
+     npm run build
+启动django
+     python manage.py runserver
+4. 配置nginx
+
+
+uwsgi的部署：
+uwsgi --http :8000 --chdir 项目的路径 --wsgi-file 项目路径/项目名称/wsgi.py --master --processes 4 --threads 2
+
+部署了这个，就不再需要执行： python manage.py runserver

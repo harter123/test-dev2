@@ -31,3 +31,11 @@ export const taskRemoveInterfaceRequest = (taskInterfaceId) => {
 export const taskGetInterfacesRequest = (taskId) => {
     return getRequest("api/backend/show/task_interfaces/" + taskId + "/")
 };
+
+export const runTaskRequest = (taskId) => {
+    return getRequest("api/backend/run/task/" + taskId + "/")
+};
+
+export const getTaskResultsRequest = (taskId, data) => {
+    return getRequest("api/backend/task/" + taskId + "/results/", data)
+};

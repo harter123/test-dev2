@@ -10,7 +10,7 @@ class InterfaceForm(forms.Form):
                            error_messages={'required': "name can not be empty"})
     description = forms.CharField(max_length=2000,
                                   min_length=1,
-                                  required=True,
+                                  required=False,
                                   error_messages={'required': "description can not be empty"})
     service_id = forms.IntegerField(required=True, min_value=1)
     path = forms.CharField(max_length=500,

@@ -14,7 +14,12 @@
                     :data="tableData"
                     style="width: 100%">
                 <el-table-column
-                        prop="date"
+                        prop="version"
+                        label="版本"
+                        min-width="20%">
+                </el-table-column>
+                <el-table-column
+                        prop="create_time"
                         label="日期"
                         min-width="20%">
                 </el-table-column>
@@ -24,12 +29,12 @@
                         min-width="20%">
                 </el-table-column>
                 <el-table-column
-                        prop="success"
+                        prop="success_count"
                         label="成功个数"
                         min-width="20%">
                 </el-table-column>
                 <el-table-column
-                        prop="failed"
+                        prop="failed_count"
                         label="失败个数"
                         min-width="20%">
                 </el-table-column>
@@ -51,6 +56,7 @@
 </template>
 
 <script>
+    import {runTaskRequest, getTaskResultsRequest} from "../../requests/task";
 
     export default {
         name: "TaskRunList",
@@ -73,7 +79,9 @@
                 this.$emit('cancel')
             },
             runTask(){
-
+                runTaskRequest(this.taskData.id).then(data=>{
+                    this.getTaskRunList();
+                })
             },
             handleSizeChange(size) {
                 this.page.size = size;
@@ -84,7 +92,16 @@
                 this.getTaskRunList()
             },
             getTaskRunList(){
-
+                getTaskResultsRequest(this.taskData.id, this.page).then(data=>{
+                    if (true === data.data.success) {
+                        this.tableData = data.data.data.list;
+                        this.page.total = data.data.data.total;
+                        this.page.page = data.data.data.page;
+                        this.page.size = data.data.data.size;
+                    } else {
+                        this.$message.info("获取任务结果失败")
+                    }
+                })
             }
         },
         created() {

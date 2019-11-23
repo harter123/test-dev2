@@ -16,13 +16,14 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
+from interface_main.tests import task_test1_get, task_test2_post
 from interface_main.views.interface.interface_detail_view import InterfaceDetailView
 from interface_main.views.interface.interface_list_view import InterfacesListView
 from interface_main.views.mock.mock_detail_view import MockDetailView
 from interface_main.views.mock.mock_list_view import MockListView, make_mock
 from interface_main.views.task.task_detail_view import TaskDetailView
 from interface_main.views.task.task_interface.task_interface_view import task_get_interfaces, task_add_interface, \
-    task_remove_interface
+    task_remove_interface, run_task, get_task_results
 from interface_main.views.task.task_list_view import TaskListView
 from interface_main.views.user.users_view import UsersView
 from interface_main.views.user.user_info_view import UserInfoView
@@ -49,4 +50,9 @@ urlpatterns = [
     path('api/backend/show/task_interfaces/<int:task_id>/', task_get_interfaces),
     path('api/backend/add/task_interface/<int:task_id>/<int:interface_id>/', task_add_interface),
     path('api/backend/remove/task_interface/<int:task_interface_id>/', task_remove_interface),
+    path('api/backend/run/task/<int:task_id>/', run_task),
+    path('api/backend/task/<int:task_id>/results/', get_task_results),
+
+    path('api/backend/run/test1/', task_test1_get),
+    path('api/backend/run/test2/', task_test2_post)
 ]

@@ -5,14 +5,13 @@ from django.utils.deprecation import MiddlewareMixin
 from interface_main.utils.http_format import response_success, response_failed
 from interface_main.exception.my_exception import MyException, ErrorCode
 
-ALLOW_PATHS = ["/api/backend/user/info/", "/api/backend/users/"]
+ALLOW_PATHS = ["/api/backend/user/info/", "api/backend/make_mock",
+    "/api/backend/users/", '/api/backend/run/test1/', '/api/backend/run/test2/']
 
 
 class MyMiddleWare(MiddlewareMixin):
     def process_request(self, request):  # 会捕捉所有的请求
         current_path = request.path
-        if "api/backend/make_mock" in current_path:
-            return
         if current_path in ALLOW_PATHS:
             pass
         else:

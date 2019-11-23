@@ -8,7 +8,6 @@
             <el-menu v-if="isShowMenu" background-color="#eff4fa" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="interface">接口</el-menu-item>
                 <el-menu-item index="task">任务</el-menu-item>
-                <el-menu-item index="debug">调试</el-menu-item>
                 <el-menu-item index="mock">mock</el-menu-item>
             </el-menu>
 

@@ -28,7 +28,7 @@
                     description: "",
                     params_type: "json",
                     params: {},
-                    headers: [],
+                    headers: {},
                     asserts: [],
                     response: "",
                 }

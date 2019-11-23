@@ -14,3 +14,15 @@ class Task(models.Model):
 class TaskInterfaceRelation(models.Model):
     task = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True)
     interface = models.ForeignKey(Interface, on_delete=models.SET_NULL, null=True)
+
+
+# 任务的执行结果
+class TaskResult(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True)
+    success = models.BooleanField('代表成功或者失败', default=False)
+    create_time = models.DateTimeField('代表创建时间', auto_now_add=True)
+    version = models.IntegerField('代表某一次的执行的版本', default=1)
+
+    request = JsonField("参数")
+    response = models.TextField("响应", default="")
+
