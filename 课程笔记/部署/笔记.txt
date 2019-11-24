@@ -1,0 +1,225 @@
+﻿为什么要进行部署：
+主要还是性能问题，开发的时候的部署不支持多进程，并发性能差之类的
+
+
+nginx:
+就是一个web的服务器，一般监听80端口，这是业内公认的性能最强大，最轻量级别的服务器。
+作用：请求分发，代理，反向代理，静态资源访问器。
+
+最常见的是作为一个服务器的入口（80端口），然后nginx分发到其他的服务
+
+
+如何部署django和 vue, 使用nginx
+
+
+1. 下载nginx
+
+http://nginx.org/en/docs/windows.html
+
+https://www.cnblogs.com/jiangwangxiang/p/8481661.html
+
+nginx 启动nginx
+nginx -s stop	fast shutdown
+nginx -s quit	graceful shutdown
+nginx -s reload	changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes
+nginx -s reopen	re-opening log files
+
+2. 项目部署结构图
+
+3.  打包vue,
+     npm run build
+
+因为window不支持uwsgi,所以就没法演示，只能使用开发版的启动方式：
+启动django
+     python manage.py runserver
+
+pip install uwsgi 安装uwsgi
+
+uwsgi的部署：
+uwsgi --http :8000 --chdir 项目的路径 --wsgi-file 项目路径/项目名称/wsgi.py --master --processes 4 --threads 2
+
+部署了这个，就不再需要执行： python manage.py runserver
+
+4. 配置nginx
+
+如何区分前后端的请求呢，后端的请求都是带 api  这个前缀，根据这个就可以区分前后端的接口
+
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+	
+# 配置vue
+        location / {
+            #root   html;
+            #index  index.html index.htm;
+			proxy_pass http://127.0.0.1:8080;
+            proxy_pass_request_headers      on;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+		
+		gzip on;
+		gzip_min_length 200;
+		gzip_buffers 4 16k;
+		gzip_comp_level 6;
+		gzip_types text/plain application/javascript text/css application/xml text/javascript application/json;
+		gzip_vary on;
+		gzip_disable "MSIE [1-6]\.";
+		gzip_proxied any;
+		
+		# 配置django
+		location /api/ {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_pass_request_headers      on;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+    }
+
+
+}
+这种方式直接没有使用vue打包出来的文件，用到vue开发版的程序，当然后端也是
+
+
+
+下面这种方式是使用了vue打包出来的静态文件，是性能最高的方式
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+		
+		root C:/classes/test-dev2/test-dev2/vue-interface-project/dist;
+		index index.html index.htm;
+
+        
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+		
+		gzip on;
+		gzip_min_length 200;
+		gzip_buffers 4 16k;
+		gzip_comp_level 6;
+		gzip_types text/plain application/javascript text/css application/xml text/javascript application/json;
+		gzip_vary on;
+		gzip_disable "MSIE [1-6]\.";
+		gzip_proxied any;
+		
+		# 配置django
+	location /api/ {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_pass_request_headers      on;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+		
+		
+		#location / {
+         #   #root   html;
+         #   #index  index.html index.htm;
+		#	proxy_pass http://127.0.0.1:8080;
+        #    proxy_pass_request_headers      on;
+        #    proxy_set_header Host $host;
+        #    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #}
+		
+		# 配置vue
+        location /css/ {
+            alias C:/classes/test-dev2/test-dev2/vue-interface-project/dist/css/;
+            expires 7d;
+        }
+	location /js/ {
+            alias C:/classes/test-dev2/test-dev2/vue-interface-project/dist/js/;
+            expires 7d;
+        }
+	location /fonts/ {
+            alias C:/classes/test-dev2/test-dev2/vue-interface-project/dist/fonts/;
+            expires 7d;
+        }
+        location @tech-support-index {
+            add_header Cache-Control no-cache;
+            expires 10;
+            root C:/classes/test-dev2/test-dev2/vue-interface-project/dist/;
+            try_files /index.html =404;
+        }
+        location / {
+            root C:/classes/test-dev2/test-dev2/vue-interface-project/dist/;
+            autoindex on;
+            try_files $uri @tech-support-index;
+        }
+
+    }
+
+
+}
+

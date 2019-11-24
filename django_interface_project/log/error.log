@@ -4,3 +4,4 @@ ERROR 2019-08-11 11:11:44,477 views 8116 7200 error-1
  [ERROR] 2019-08-18 21:45:48,646 [Thread-2:7056] [interface:48] [users_view:post] - {"username": [{"message": "\u7528\u6237\u540d\u4e0d\u80fd\u4e3a\u7a7a", "code": "required"}], "password": [{"message": "\u5bc6\u7801\u4e0d\u80fd\u4e3a\u7a7a", "code": "required"}]}
  [ERROR] 2019-08-18 21:47:18,571 [Thread-2:2076] [interface:48] [users_view:post] - {"username": [{"message": "username can not be empty", "code": "required"}], "password": [{"message": "password can not be empty", "code": "required"}]}
  [ERROR] 2019-08-18 21:48:05,148 [Thread-2:2076] [interface:25] [users_view:get] - {"username": [{"message": "username can not be empty", "code": "required"}]}
+ [ERROR] 2019-11-24 10:58:31,193 [Thread-4:7788] [interface:25] [users_view:get] - {"username": [{"message": "username can not be empty", "code": "required"}], "password": [{"message": "password can not be empty", "code": "required"}]}

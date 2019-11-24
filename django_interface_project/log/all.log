@@ -2377,3 +2377,27 @@ interface_main.exception.my_exception.MyException: 用户没有登录
  [INFO] 2019-11-17 11:32:27,334 [Thread-3:7952] [django.server:154] [basehttp:log_message] - "GET /api/backend/tasks/ HTTP/1.1" 200 266
  [INFO] 2019-11-17 11:32:33,282 [Thread-3:7952] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
  [INFO] 2019-11-17 11:32:35,195 [Thread-3:7952] [django.server:154] [basehttp:log_message] - "GET /api/backend/tasks/ HTTP/1.1" 200 266
+ [INFO] 2019-11-24 10:40:00,879 [Thread-1:5836] [django.server:154] [basehttp:log_message] - "GET /api/backend/user/info/ HTTP/1.1" 200 95
+ [INFO] 2019-11-24 10:40:00,887 [Thread-3:3268] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [ERROR] 2019-11-24 10:58:31,193 [Thread-4:7788] [interface:25] [users_view:get] - {"username": [{"message": "username can not be empty", "code": "required"}], "password": [{"message": "password can not be empty", "code": "required"}]}
+ [INFO] 2019-11-24 10:58:31,201 [Thread-4:7788] [django.server:154] [basehttp:log_message] - "GET /api/backend/users/ HTTP/1.0" 200 95
+ [INFO] 2019-11-24 11:00:25,544 [Thread-5:7776] [django.server:154] [basehttp:log_message] - "GET /api/backend/user/info/ HTTP/1.1" 200 107
+ [INFO] 2019-11-24 11:00:25,574 [Thread-5:7776] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 101
+ [INFO] 2019-11-24 11:00:39,415 [Thread-5:7776] [django.server:154] [basehttp:log_message] - "GET /api/backend/users/?username=user1&password=user1 HTTP/1.1" 200 91
+ [INFO] 2019-11-24 11:00:47,170 [Thread-5:7776] [django.server:154] [basehttp:log_message] - "GET /api/backend/user/info/ HTTP/1.1" 200 95
+ [INFO] 2019-11-24 11:00:47,185 [Thread-6:4824] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [INFO] 2019-11-24 11:01:38,901 [Thread-6:4824] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=5&page=1&size=10 HTTP/1.1" 200 112
+ [INFO] 2019-11-24 11:01:43,521 [Thread-6:4824] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=3&page=1&size=10 HTTP/1.1" 200 112
+ [INFO] 2019-11-24 11:01:46,420 [Thread-6:4824] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=1&page=1&size=10 HTTP/1.1" 200 450
+ [INFO] 2019-11-24 11:18:58,470 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/user/info/ HTTP/1.1" 200 95
+ [INFO] 2019-11-24 11:18:58,482 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [INFO] 2019-11-24 11:19:03,399 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=1&page=1&size=10 HTTP/1.1" 200 450
+ [INFO] 2019-11-24 11:19:05,297 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=2&page=1&size=10 HTTP/1.1" 200 784
+ [INFO] 2019-11-24 11:19:09,019 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/interfaces/?service_id=3&page=1&size=10 HTTP/1.1" 200 112
+ [INFO] 2019-11-24 11:21:51,776 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/tasks/ HTTP/1.1" 200 266
+ [INFO] 2019-11-24 11:21:54,799 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/mocks/?page=1&size=10 HTTP/1.1" 200 289
+ [INFO] 2019-11-24 11:21:56,769 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [INFO] 2019-11-24 11:22:13,799 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/tasks/ HTTP/1.1" 200 266
+ [INFO] 2019-11-24 11:22:21,247 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [INFO] 2019-11-24 11:22:29,270 [Thread-8:8128] [django.server:154] [basehttp:log_message] - "GET /api/backend/services/ HTTP/1.1" 200 696
+ [INFO] 2019-11-24 11:22:29,276 [Thread-7:4308] [django.server:154] [basehttp:log_message] - "GET /api/backend/user/info/ HTTP/1.1" 200 95
